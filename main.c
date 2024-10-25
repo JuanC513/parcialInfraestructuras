@@ -17,17 +17,18 @@ int calcularSumaPixeles(int *imagen, int width, int height);
 char *filename;
 
 int main(int argc, char* argv[]) {
-    //int width = 1024, height = 1024;
-    int width = 1280, height = 960;
+    int width = atoi(argv[2]);  // Convertir el ancho de string a entero
+    int height = atoi(argv[3]); // Convertir la altura de string a entero
     int *imagen = (int *)malloc(width * height * sizeof(int));
     int *imagenProcesada = (int *)malloc(width * height * sizeof(int));
 
-    if (argc != 2) {
-        fprintf(stderr, "Dar un nombre de archivo de entrada");
+    if (argc != 4) {
+        fprintf(stderr, "Ingrese todos los argumentos");
         exit(1);
     }
 
     filename = argv[1];
+    
     // Cargar la imagen (no paralelizable)
     cargarImagen(imagen, width, height);
 
@@ -83,7 +84,7 @@ void guardarImagen(int *imagen, int width, int height) {
     fclose(archivo);
 }
 
-/* Código secuencial
+/* //Código secuencial
 
 void aplicarFiltro(int *imagen, int *imagenProcesada, int width, int height) {
     int Gx[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
@@ -135,8 +136,7 @@ void aplicarFiltro(int *imagen, int *imagenProcesada, int width, int height) {
 }
 
 
-
-/* Código secuencial
+/* //Código secuencial
 
 int calcularSumaPixeles(int *imagen, int width, int height) {
     int suma = 0;
